@@ -38,16 +38,21 @@ export default function SpellList () {
   }
 
   const handleReset = (e) => {
-    /* todo: not clearing inputs? */
+    e.preventDefault();
+
     setSpellClass('');
     setSpellSchool('');
     setSpellLevel('');
     setSpellConcentration('');
     setSearchQuery('');
+
+    updateResults(); // todo: this refetches with the old data... I think cause the above is all promises, so this fires using old data?
   }
 
   const updateResults = () => {
     /* todo: clean up */
+
+    debugger;
     let concentration;
     if (spellConcentration === 'true') concentration = true;
     if (spellConcentration === 'false') concentration = false;
@@ -154,7 +159,7 @@ export default function SpellList () {
           autoFocus
         />
         <button type="submit" className="btn btn-primary">Search</button>
-        <button className="btn btn-secondary ms-2" onClick={handleReset}>Reset</button>
+        <button type="button" className="btn btn-secondary ms-2" onClick={(e) => handleReset(e)}>Reset</button>
       </form>
 
       {/* todo: paginate */}
